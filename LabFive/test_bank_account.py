@@ -6,10 +6,10 @@ from bank_account import BankAccount
 
 class TestBankAccount(unittest.TestCase):
     def setUp(self):
-        self.account = BankAccount("Анна Иванова", "123456")
+        self.account = BankAccount("Anna Ivanova", "123456")
 
     def test_new_account_stores_details_and_starts_empty(self):
-        self.assertEqual(self.account.owner, "Анна Иванова")
+        self.assertEqual(self.account.owner, "Anna Ivanova")
         self.assertEqual(self.account.account_number, "123456")
         self.assertEqual(self.account.get_balance(), Decimal("0"))
         self.assertTrue(self.account.is_empty())
@@ -40,7 +40,7 @@ class TestBankAccount(unittest.TestCase):
                 self.assertEqual(self.account.get_balance(), Decimal("50"))
 
     def test_transfer_updates_both_accounts_by_same_amount(self):
-        recipient = BankAccount("Борис Петров", "654321")
+        recipient = BankAccount("Boris Petrov", "654321")
         self.account.deposit("100")
 
         self.account.transfer(recipient, "40.25")
@@ -49,7 +49,7 @@ class TestBankAccount(unittest.TestCase):
         self.assertEqual(recipient.get_balance(), Decimal("40.25"))
 
     def test_failed_transfer_does_not_change_either_account(self):
-        recipient = BankAccount("Борис Петров", "654321")
+        recipient = BankAccount("Boris Petrov", "654321")
         self.account.deposit("20")
 
         with self.assertRaises(ValueError):
@@ -59,7 +59,7 @@ class TestBankAccount(unittest.TestCase):
         self.assertEqual(recipient.get_balance(), Decimal("0"))
 
     def test_transfer_rejects_non_positive_amount(self):
-        recipient = BankAccount("Борис Петров", "654321")
+        recipient = BankAccount("Boris Petrov", "654321")
         self.account.deposit("20")
 
         with self.assertRaises(ValueError):
